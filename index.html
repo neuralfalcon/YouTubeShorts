@@ -10,7 +10,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
-            background-color: #f9f9f9;
+            background-color: #353740;
+            color: #fff;
         }
 
         h1 {
@@ -18,9 +19,9 @@
         }
 
         .form-container {
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: #25272a;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -28,11 +29,13 @@
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 10px 0px;
             font-size: 16px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #777;
             border-radius: 4px;
+            color: #fff;
+            background-color: #40414F;
         }
 
         input[type="submit"] {
@@ -53,6 +56,16 @@
         .result {
             margin-top: 20px;
         }
+
+        /* Styling for the generated video link */
+        .result a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -60,14 +73,15 @@
     <h1>YouTube Shorts to Video Link Generator</h1>
     <div class="form-container">
         <form id="youtubeForm">
+            <label for="youtubeLink">Enter YouTube Shorts Link:<br></label>
             <input type="text" id="youtubeLink" name="youtubeLink"
-                placeholder="Enter YouTube Shorts Link (https://www.youtube.com/shorts/pHhpXrIOwsY)" required>
+                placeholder="e.g., https://www.youtube.com/shorts/pHhpXrIOwsY" required>
             <input type="submit" value="Generate Video Link">
         </form>
         <div class="result" id="resultContainer"></div>
     </div>
 
- 
+
     <script>
         document.getElementById("youtubeForm").addEventListener("submit", function (event) {
             event.preventDefault();
@@ -77,7 +91,7 @@
                 const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
                 displayResult(youtubeUrl);
             } else {
-                displayError("Invalid YouTube Link. Please provide a valid link.");
+                displayError("Invalid  YouTube Shorts Link. Please provide a valid link.");
             }
         });
 
