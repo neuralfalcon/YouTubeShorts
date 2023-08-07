@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Shorts to Video Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d32f2f;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>YouTube Shorts to Video Link Generator</h1>
+    <div class="form-container">
+        <form id="youtubeForm">
+            <input type="text" id="youtubeLink" name="youtubeLink"
+                placeholder="Enter YouTube Shorts Link (e.g., https://www.youtube.com/shorts/qF9uvkRPkk4)" required>
+            <input type="submit" value="Generate Video Link">
+        </form>
+        <div class="result" id="resultContainer"></div>
+    </div>
+
+ 
+    <script>
+        document.getElementById("youtubeForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const youtubeLink = document.getElementById("youtubeLink").value;
+            const videoId = extractVideoId(youtubeLink);
+            if (videoId) {
+                const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                displayResult(youtubeUrl);
+            } else {
+                displayError("Invalid YouTube Link. Please provide a valid link.");
+            }
+        });
+
+        function extractVideoId(link) {
+            const shortPattern = /\/shorts\/([a-zA-Z0-9_-]+)/;
+            const watchPattern = /[?&]v=([^&]+)/;
+            let match = link.match(shortPattern);
+            if (match) {
+                return match[1];
+            } else {
+                match = link.match(watchPattern);
+                return match ? match[1] : null;
+            }
+        }
+
+        function displayResult(videoUrl) {
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = `
+                <p><strong>Generated Video Link:</strong></p>
+                <a href="${videoUrl}" target="_blank">${videoUrl}</a>
+            `;
+        }
+
+        function displayError(message) {
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = `
+                <p style="color: #f44336;"><strong>Error:</strong> ${message}</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>
