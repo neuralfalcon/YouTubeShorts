@@ -36,6 +36,7 @@
             border-radius: 4px;
             color: #fff;
             background-color: #40414F;
+            text-align: center; /* Center the placeholder text */
         }
 
         input[type="submit"] {
@@ -64,6 +65,7 @@
         }
 
         .result a:hover {
+            color: #f44336; /* Change color to red on hover */
             text-decoration: underline;
         }
     </style>
@@ -73,7 +75,7 @@
     <h1>YouTube Shorts to Video Link Generator</h1>
     <div class="form-container">
         <form id="youtubeForm">
-            <label for="youtubeLink">Enter YouTube Shorts Link:<br></label>
+            <label for="youtubeLink">Enter YouTube Shorts Link: </label>
             <input type="text" id="youtubeLink" name="youtubeLink"
                 placeholder="e.g., https://www.youtube.com/shorts/pHhpXrIOwsY" required>
             <input type="submit" value="Generate Video Link">
@@ -110,7 +112,6 @@
         function displayResult(videoUrl) {
             const resultContainer = document.getElementById("resultContainer");
             resultContainer.innerHTML = `
-                <p><strong>Generated Video Link:</strong></p>
                 <a href="${videoUrl}" target="_blank">${videoUrl}</a>
             `;
         }
